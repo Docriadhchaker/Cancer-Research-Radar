@@ -21,7 +21,7 @@ Unlike traditional literature search engines, Cancer Research Radar organizes ev
 # Architecture
 
 <p align="center">
-  <img src="docs/assets/architecture.svg" alt="Cancer Research Radar Architecture" width="100%">
+  <img src="docs/screenshots/architecture.svg" alt="Cancer Research Radar Architecture" width="100%">
 </p>
 
 The platform follows a modular provider architecture that combines multiple biomedical evidence sources through a unified **Research Aggregator Engine**, ensuring full provenance, transparent source attribution, and graceful degradation whenever one provider becomes unavailable.
@@ -183,3 +183,63 @@ npm install
 cp .env.example .env
 
 npm run dev
+
+## Visit:
+http://localhost:3000
+
+## Environment Variables
+GEMINI_API_KEY=""
+
+CURE_CANCER_AI_API_KEY=""
+
+ClinicalTrials.gov requires no API key.
+
+Known Limitations
+Clinical trial availability depends on registry coverage.
+Geographic searches may legitimately return zero local trial sites.
+Clinical maturity is an evidence metric and not a predictor of treatment efficacy.
+Research Directions are evidence synthesis constructs and should never replace expert medical judgement.
+Scientific Disclaimer
+Cancer Research Radar is strictly an exploratory biomedical informatics platform.
+
+The application:
+does NOT provide medical advice;
+does NOT recommend treatments;
+does NOT determine patient eligibility;
+does NOT replace multidisciplinary tumour boards or oncology specialists.
+Research activity, publication volume or trial maturity must never be interpreted as evidence of clinical benefit.
+Roadmap
+Completed
+✅ ClinicalTrials.gov LIVE integration
+✅ Cure Cancer With AI LIVE integration
+✅ Interactive Research Radar
+✅ Evidence Explorer
+✅ Research Direction Engine
+✅ Research Momentum Engine
+✅ Source traceability
+✅ Server-side provider architecture
+Planned
+⏳ PubMed native integration
+⏳ OpenFDA native provider
+⏳ Europe PMC provider
+⏳ Research Intelligence Engine
+⏳ Geographic travel-time estimation
+⏳ Multi-provider biomedical deduplication
+⏳ Exportable evidence reports
+Documentation
+Additional documentation is available in the /docs folder.
+Architecture
+Data Sources
+Safety Principles
+Contributing
+This repository is currently released as an open-source research Proof of Concept.
+Contributions, discussions, and scientific feedback are welcome.
+Citation
+If you use Cancer Research Radar in academic work, presentations, or demonstrations, please cite this repository.
+License
+MIT License
+Copyright © 2026 Dr Riadh Chaker
+
+
+
+
