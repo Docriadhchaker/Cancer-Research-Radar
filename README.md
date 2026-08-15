@@ -142,11 +142,23 @@ CURE_CANCER_AI_API_KEY=""
 
 ## 9. Screenshots Placeholder
 
-| Research Radar 2D Map | Clinical Trials Explorer (LIVE) |
-|---|---|
-| *(Screenshot Placeholder: 2D Maturity vs Activity Radar)* | *(Screenshot Placeholder: ClinicalTrials.gov live integration)* |
+### Oncology Research Landscape
 
----
+![Cancer Research Radar Dashboard](docs/screenshots/02-dashboard-radar.png)
+
+### Evidence Explorer
+
+![Evidence Explorer](docs/screenshots/03-evidence-explorer.png)
+
+### Live Clinical Trial Discovery
+
+![Clinical Trials Live](docs/screenshots/04-clinical-trials-live.png)
+
+### Live Literature & Regulatory Evidence
+
+| Latest Research | Regulatory Evidence |
+|---|---|
+| ![Latest Research](docs/screenshots/05-latest-research-live.png) | ![Regulatory](docs/screenshots/06-regulatory-live.png) |
 
 ## 10. Future Roadmap
 
