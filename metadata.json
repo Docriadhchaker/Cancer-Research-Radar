@@ -1,0 +1,6 @@
+{
+  "name": "Cancer Research Radar",
+  "description": "An open-source oncology research exploration and clinical trial discovery platform mapping emerging therapeutic strategies, maturity, and global trials.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
