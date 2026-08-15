@@ -142,23 +142,35 @@ CURE_CANCER_AI_API_KEY=""
 
 ## 9. Screenshots Placeholder
 
-### Oncology Research Landscape
+# Screenshots
 
-![Cancer Research Radar Dashboard](docs/screenshots/02-dashboard-radar.png)
+## Dashboard
 
-### Evidence Explorer
+![Dashboard](docs/screenshots/02-dashboard-radar.png)
+
+---
+
+## Evidence Explorer
 
 ![Evidence Explorer](docs/screenshots/03-evidence-explorer.png)
 
-### Live Clinical Trial Discovery
+---
 
-![Clinical Trials Live](docs/screenshots/04-clinical-trials-live.png)
+## Clinical Trials (LIVE)
 
-### Live Literature & Regulatory Evidence
+![Clinical Trials](docs/screenshots/04-clinical-trials-live.png)
 
-| Latest Research | Regulatory Evidence |
-|---|---|
-| ![Latest Research](docs/screenshots/05-latest-research-live.png) | ![Regulatory](docs/screenshots/06-regulatory-live.png) |
+---
+
+## Latest Research
+
+![Latest Research](docs/screenshots/05-latest-research.png)
+
+---
+
+## Regulatory Evidence
+
+![Regulatory](docs/screenshots/06-regulatory.png)
 
 ## 10. Future Roadmap
 
