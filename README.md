@@ -160,4 +160,4 @@ CURE_CANCER_AI_API_KEY=""
 
 ## 📄 License
 
-MIT License — Copyright (c) 2026 Cancer Research Radar Contributors.
+MIT License — Copyright (c) 2026 Dr Riadh Chaker.
