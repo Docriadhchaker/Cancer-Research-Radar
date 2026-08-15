@@ -4,130 +4,170 @@
 
 ### Mapping emerging oncology research through traceable biomedical evidence
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-2563EB?style=flat-square)](LICENSE)
-[![ClinicalTrials.gov](https://img.shields.io/badge/ClinicalTrials.gov-LIVE-10B981?style=flat-square)](https://clinicaltrials.gov/)
-[![Cure Cancer With AI](https://img.shields.io/badge/Cure_Cancer_With_AI-LIVE-10B981?style=flat-square)](https://www.curecancerwithai.com/)
-[![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=111827)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
-[![Project status](https://img.shields.io/badge/Status-Research_POC-F59E0B?style=flat-square)](#project-status)
+[![TypeScript 5.8](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React 19](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=111827)](https://react.dev/)
+[![Tailwind CSS 4](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Node.js + Express](https://img.shields.io/badge/Backend-Node.js_%7C_Express_4-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://expressjs.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-F59E0B?style=flat-square)](LICENSE)
+
+[![ClinicalTrials.gov v2](https://img.shields.io/badge/Registry-ClinicalTrials.gov_v2_REST_LIVE-059669?style=flat-square)](https://clinicaltrials.gov/data-api/api)
+[![Cure Cancer With AI](https://img.shields.io/badge/Provider-Cure_Cancer_With_AI_LIVE-059669?style=flat-square)](https://www.curecancerwithai.com/developers)
+[![Project status](https://img.shields.io/badge/Status-Research_POC-4338CA?style=flat-square)](#project-status)
 
 <br>
 
-<img src="docs/screenshots/02-dashboard-radar.png" alt="Cancer Research Radar dashboard showing live evidence metrics, research directions, and the oncology strategy radar" width="100%">
+<img src="docs/screenshots/02-dashboard-radar.png" alt="Cancer Research Radar dashboard with evidence metrics, research directions, and the oncology strategy radar" width="100%">
 
 </div>
 
-Cancer Research Radar is an open-source biomedical evidence exploration platform. It brings together clinical-trial protocols, oncology literature records, and regulatory evidence in a unified, source-aware interface.
+Cancer Research Radar is an open-source biomedical evidence exploration platform that brings together clinical-trial protocols, oncology literature records, regulatory evidence, and AI-assisted synthesis in a unified, source-aware interface.
 
-Rather than presenting an undifferentiated list of records, the application organizes retrieved evidence into **research directions** so users can explore what is being studied, how clinically mature a direction appears, and which source records support it.
+Instead of returning an undifferentiated list of records, the application organizes retrieved evidence into **research directions** so users can inspect what is being studied, how clinically mature a direction appears, and which records support it.
 
 > **Research question:** For a cancer type, stage, biomarker profile, and geography, which therapeutic strategies are being investigated, what evidence is available, and where are relevant clinical trials registered?
+
+## Engineering highlights
+
+- **Provider-oriented evidence pipeline:** ClinicalTrials.gov, Cure Cancer With AI, demo data, and future providers are separated behind typed interfaces and normalized before reaching the UI.
+- **Deterministic descriptive metrics:** Radar maturity, research activity, bubble size, and momentum categories are calculated from explicit heuristics such as phase, trial counts, recruiting ratios, and publication counts—not chosen arbitrarily by an LLM.
+- **Server-side integration boundary:** External requests and API credentials remain behind the Express server, while the React interface consumes normalized application endpoints.
+- **Traceability-aware models:** Source identifiers and links—including NCT IDs, PMIDs, DOIs, and regulatory references—are retained when the upstream provider supplies them.
+- **Visible degradation modes:** The interface distinguishes live, partial-live, demo, and fallback states instead of silently presenting cached or reference data as live evidence.
 
 > [!CAUTION]
 > **Cancer Research Radar is a research and software-engineering proof of concept—not a medical device, clinical decision-support system, or source of medical advice.** It does not recommend treatments, determine clinical-trial eligibility, or predict patient benefit. Research activity, maturity, and momentum do not measure safety, efficacy, or likelihood of regulatory approval. Clinical decisions must be made with qualified healthcare professionals using authoritative, current sources.
 
 ## Why this project matters
 
-Oncology evidence is distributed across registries, publications, and regulatory sources that use different structures and vocabularies. This fragmentation makes it difficult to connect a biological hypothesis with active studies and regulatory context. It also creates opportunities for automated systems to blur important boundaries—for example, between an investigational regimen and an approved indication.
+Oncology evidence is distributed across trial registries, publications, and regulatory sources that use different structures and vocabularies. This fragmentation makes it difficult to connect a biological hypothesis with active studies and regulatory context. It also creates opportunities for automated systems to blur important boundaries—for example, between an investigational regimen and an approved indication.
 
-Cancer Research Radar explores an engineering approach built around:
+Cancer Research Radar explores an engineering approach built around five principles:
 
-- **evidence before synthesis** — source records are retrieved before higher-level organization;
-- **traceability by design** — identifiers and source links remain attached to normalized records;
-- **explicit uncertainty** — missing fields and provider failures are surfaced rather than silently filled;
-- **clear data modes** — live, partial, demo, and fallback states are visible in the interface;
-- **non-prescriptive outputs** — the product maps research activity; it does not rank treatments for a patient.
+1. **Evidence before synthesis** — retrieve source records before producing higher-level organization.
+2. **Traceability by design** — keep identifiers and evidence links attached to normalized records.
+3. **Explicit uncertainty** — surface missing fields and provider failures instead of silently filling gaps.
+4. **Transparent data modes** — show whether a result is live, partial, demo, or fallback.
+5. **Non-prescriptive output** — map research activity without ranking treatments for an individual.
 
-## Features
+## Product capabilities
 
-- **Structured oncology search** using cancer type, stage, biomarker terms, and geography.
-- **Live ClinicalTrials.gov integration** through the official v2 REST API, with protocol status, phase, sponsor, interventions, eligibility fields, and study locations when reported.
-- **Live Cure Cancer With AI integration** for oncology literature and regulatory records, accessed through the server so credentials do not reach the browser.
-- **Research Direction Engine** that groups converging evidence into explorable themes while retaining links to the contributing records.
-- **Interactive Oncology Strategy Radar** showing clinical maturity, normalized research activity, evidence volume, and research momentum.
-- **Evidence Explorer** connecting each research direction to its supporting trials, literature, regulatory context, timeline, and biomarkers.
-- **Dedicated views** for the dashboard, clinical trials, latest research, and regulatory evidence.
-- **Deterministic descriptive metrics** for radar placement and momentum categories; these metrics describe activity, not therapeutic value.
-- **Geographic fallback transparency** when no study sites match a requested location and broader results are shown.
-- **Graceful degradation and caching** with visible per-source status instead of silent mixing of live and demo records.
+- Structured oncology search using cancer type, stage, biomarkers, and geography.
+- Live ClinicalTrials.gov v2 retrieval with protocol status, phase, sponsor, interventions, eligibility fields, and study locations when reported.
+- Server-side Cure Cancer With AI integration for oncology literature and regulatory records.
+- Research-direction synthesis with supporting evidence references.
+- Interactive Oncology Strategy Radar.
+- Evidence Explorer with trials, publications, regulatory context, timelines, and biomarkers.
+- Dedicated Dashboard, Clinical Trials, Latest Research, and Regulatory views.
+- Explicit source-level live and fallback labels.
+- In-memory caching and graceful provider degradation.
+- Direct source links for further verification.
 
 ## System architecture
 
 <p align="center">
-  <img src="screenshots/architecture.svg" alt="Cancer Research Radar system architecture: user query, API gateway, biomedical providers, research aggregation, normalization and provenance, research directions, dashboard, radar, and Evidence Explorer" width="100%">
+  <img src="screenshots/architecture.svg" alt="Cancer Research Radar architecture: structured query, server gateway, evidence providers, aggregation, normalization, provenance, research directions, dashboard, radar, and Evidence Explorer" width="100%">
 </p>
 
-The application uses a provider-oriented architecture. The server validates a structured cohort query, retrieves evidence from available providers, normalizes heterogeneous responses into shared domain models, and preserves provenance metadata. The interface consumes the normalized result without needing provider-specific logic.
+The server validates a structured cohort query, calls the available providers, normalizes heterogeneous responses into shared domain models, and returns a unified research landscape. The UI consumes those normalized models without implementing provider-specific parsing.
 
-This separation allows a source to fail or be replaced without requiring a rewrite of the dashboard. It also keeps external API keys in server-side code.
+```text
+Structured oncology query
+          │
+          ▼
+Node.js / Express API gateway
+          │
+          ├── ClinicalTrials.gov provider ──► official v2 REST API
+          ├── Cure Cancer With AI provider ─► research and regulatory endpoints
+          ├── Gemini synthesis service ─────► optional grounded organization layer
+          └── Demo provider ────────────────► explicit fallback/reference records
+          │
+          ▼
+Research aggregation and normalization
+          │
+          ▼
+Research directions + provenance metadata
+          │
+          ├── Dashboard
+          ├── Oncology Strategy Radar
+          ├── Evidence Explorer
+          ├── Clinical Trials
+          ├── Latest Research
+          └── Regulatory Evidence
+```
 
-## Evidence, provenance, and data modes
+## Technology stack
 
-### Current integrations
+| Layer | Current implementation |
+|---|---|
+| Frontend | React 19, TypeScript 5.8, Vite 6, Tailwind CSS 4, Motion, Lucide React |
+| Backend | Node.js, Express 4, TypeScript, tsx in development, esbuild for production bundling |
+| Trial registry | ClinicalTrials.gov v2 REST API |
+| Literature and regulatory provider | Cure Cancer With AI through server-side endpoints |
+| AI-assisted synthesis | Google Gemini through `@google/genai` |
+| Local fallback | Curated demo/reference cohorts with explicit status labels |
 
-| Provider or layer | Role | Authentication | Current state |
+Version claims above are taken from the repository's current `package.json`, not inferred from the UI.
+
+## Evidence providers and current status
+
+| Provider or layer | Purpose | Authentication | Current status |
 |---|---|---:|---|
 | [ClinicalTrials.gov](https://clinicaltrials.gov/data-api/api) | Trial protocols, recruitment status, phases, interventions, sponsors, eligibility fields, and locations | None | **Live integration** |
-| [Cure Cancer With AI](https://www.curecancerwithai.com/developers) | Oncology literature and regulatory records | Server-side API key | **Live integration** |
-| Curated reference fixtures | Clearly labelled offline/demo records used when live evidence is unavailable | None | **Fallback only** |
-| Google Gemini | Optional server-side assistance for harmonization or synthesis; never treated as a primary biomedical source | Server-side API key | **Optional** |
+| [Cure Cancer With AI](https://www.curecancerwithai.com/developers) | Oncology literature and regulatory records | Server-side API key | **Live when configured** |
+| Google Gemini | Research-direction synthesis and harmonization | Server-side API key | **Available when configured** |
+| Demo/reference provider | Clearly labelled offline or fallback records | None | **Fallback** |
+| PubMed native provider | Direct NCBI E-utilities ingestion | None | **Prepared adapter only** |
+| openFDA native provider | Direct FDA label and regulatory ingestion | Optional key | **Prepared adapter only** |
 
-Direct PubMed and openFDA providers are planned. Until they are implemented, the README does **not** describe them as live native integrations.
+The current `PubMedProvider` and `OpenFDAProvider` define interfaces and base URLs but return empty arrays. They are therefore documented as roadmap items, not as live native integrations.
 
-### Provenance model
+## Provenance and data modes
 
-Where a provider supplies the relevant metadata, normalized records retain:
+Where the upstream provider supplies them, normalized records retain:
 
-- provider name and source type;
+- provider and source type;
 - source identifier, such as an NCT ID, PMID, DOI, or regulatory reference;
 - original evidence URL;
 - retrieval timestamp;
-- live, demo, or fallback status.
+- live, demo, or fallback state.
 
-System-generated labels, groupings, metrics, and summaries are presentation or synthesis layers. They are not original scientific sources and must remain distinguishable from provider data.
+System-generated groupings, metrics, labels, and summaries are presentation or synthesis layers. They are not original scientific sources and must remain distinguishable from provider data.
 
-### Runtime data modes
-
-| Mode | Meaning |
+| Runtime mode | Meaning |
 |---|---|
-| **LIVE DATA** | All required providers for the current request returned live data. |
-| **PARTIAL LIVE DATA** | At least one provider returned live data while another was unavailable or used a clearly labelled fallback. |
-| **DEMO DATA** | The view is based on local reference fixtures rather than current provider responses. |
-| **DEMO FALLBACK** | A specific provider or record is being represented by an explicitly labelled fallback after a live request could not be completed. |
+| **LIVE DATA** | The required configured providers for the current request returned live responses. |
+| **PARTIAL LIVE DATA** | At least one provider returned live evidence while another failed, was unavailable, or used a clearly labelled fallback. |
+| **DEMO DATA** | The displayed landscape is based on local reference records rather than current provider responses. |
+| **DEMO FALLBACK** | A provider or record is represented by an explicitly labelled fallback after a live request could not be completed. |
 
-Live and fallback records should never be combined without a visible source-level status. A `LIVE DATA` badge describes provider availability for the request—not scientific validation or clinical relevance.
+A `LIVE DATA` badge describes retrieval state for a request. It does **not** imply scientific validation, clinical relevance, treatment efficacy, or patient eligibility.
 
-## How the radar should be read
+## How to read the radar
 
 | Visual property | Interpretation |
 |---|---|
-| Horizontal position | Clinical maturity derived from available development-stage evidence. |
-| Vertical position | Normalized research activity in the retrieved dataset. |
-| Bubble size | Relative supporting evidence volume. |
-| Bubble color | Research-momentum category calculated from measurable activity signals. |
+| Horizontal position | Clinical maturity derived from the available development-stage evidence. |
+| Vertical position | Normalized research activity calculated from the retrieved dataset. |
+| Bubble size | Relative evidence volume based on trial and publication counts. |
+| Bubble color | A deterministic research-momentum category based on explicit heuristics. |
 
-These are descriptive software metrics. A prominent bubble does not mean that an intervention works, is safe, is available, or is appropriate for an individual.
+The current metric engine uses transparent thresholds and formulas. These values describe activity in the retrieved dataset; they are not probabilities of clinical success and must not be compared as treatment scores.
 
-## Screenshots
+## Product showcase
 
-### Define an oncology cohort
-
-![Cancer Research Radar cohort search](docs/screenshots/01-search.png)
-
-### Explore the evidence behind a research direction
-
-![Evidence Explorer showing source-grounded trials, literature, regulatory context, and timeline](docs/screenshots/03-evidence-explorer.png)
-
-### Inspect live evidence streams
-
-| Clinical trials | Latest research |
+| Evidence Explorer | Live ClinicalTrials.gov results |
 |---|---|
-| ![Live ClinicalTrials.gov results with study status, phase, sponsor, interventions, and locations](docs/screenshots/04-clinical-trials-live.png) | ![Latest oncology research records with source identifiers and links](docs/screenshots/05-latest-research.png) |
+| <img src="docs/screenshots/03-evidence-explorer.png" alt="Evidence Explorer with supporting trials, literature, regulatory context, and timeline" width="100%"> | <img src="docs/screenshots/04-clinical-trials-live.png" alt="Live ClinicalTrials.gov results with phase, recruitment, sponsor, interventions, and locations" width="100%"> |
+| Inspect the source records and quantitative signals behind a research direction. | Explore normalized trial protocols while retaining links to the registry records. |
 
-### Review regulatory evidence
+Only verified repository paths are used above:
 
-![Regulatory evidence view with indication-aware source records](docs/screenshots/06-regulatory.png)
+```text
+docs/screenshots/02-dashboard-radar.png
+docs/screenshots/03-evidence-explorer.png
+docs/screenshots/04-clinical-trials-live.png
+screenshots/architecture.svg
+```
 
 ## Quick start
 
@@ -136,79 +176,137 @@ These are descriptive software metrics. A prominent bubble does not mean that an
 - Node.js 18 or later
 - npm
 
-After cloning the repository:
+### Installation
 
 ```bash
-cd cancer-research-radar
+git clone https://github.com/Docriadhchaker/Cancer-Research-Radar.git
+cd Cancer-Research-Radar
 npm install
 cp .env.example .env
 npm run dev
 ```
 
-On Windows PowerShell, use `Copy-Item .env.example .env` instead of `cp .env.example .env` if `cp` is unavailable.
+On Windows PowerShell, use:
 
-Open [http://localhost:3000](http://localhost:3000). ClinicalTrials.gov does not require an API key, so its live integration can operate without additional credentials.
+```powershell
+Copy-Item .env.example .env
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+### Validation and production build
+
+```bash
+# TypeScript validation
+npm run lint
+
+# Frontend and server production build
+npm run build
+
+# Run the compiled production server after building
+npm start
+```
+
+ClinicalTrials.gov requires no API key. Other capabilities depend on the environment variables described below.
 
 ## Environment variables
 
-Create `.env` from `.env.example` and add only the credentials you intend to use:
+Create `.env` from `.env.example`:
 
 ```env
-# Enables live literature and regulatory retrieval through Cure Cancer With AI
-CURE_CANCER_AI_API_KEY=
+# Required for Gemini-powered synthesis calls
+GEMINI_API_KEY="your_gemini_api_key"
 
-# Optional: enables server-side AI-assisted harmonization or synthesis
-GEMINI_API_KEY=
+# Required for live Cure Cancer With AI literature and regulatory requests
+CURE_CANCER_AI_API_KEY="your_cure_cancer_with_ai_api_key"
+
+# Local application URL; AI Studio may inject a hosted URL at runtime
+APP_URL="http://localhost:3000"
 ```
 
 Security requirements:
 
-- keep `.env` out of version control;
-- commit only placeholder values in `.env.example`;
+- never commit `.env`;
+- keep only placeholder values in `.env.example`;
 - read credentials on the server only;
-- never expose secrets through `VITE_*` variables, browser storage, client logs, or client-facing error payloads.
+- never expose secrets through `VITE_*` variables, browser storage, client logs, or client-facing payloads;
+- confirm provider failure through visible partial or fallback states rather than claiming a fully live response.
 
-When `CURE_CANCER_AI_API_KEY` is absent or a provider request fails, the application should report the resulting partial or fallback mode rather than claim a fully live response.
+## Project structure
+
+```text
+Cancer-Research-Radar/
+├── docs/
+│   ├── architecture.md
+│   ├── data-sources.md
+│   ├── safety.md
+│   └── screenshots/
+│       ├── 02-dashboard-radar.png
+│       └── 03-evidence-explorer.png
+├── screenshots/
+│   └── architecture.svg
+├── src/
+│   ├── components/
+│   ├── data/demo/
+│   │   └── metricsCalculator.ts
+│   ├── server/
+│   ├── services/providers/
+│   ├── types/
+│   ├── App.tsx
+│   └── main.tsx
+├── .env.example
+├── server.ts
+├── package.json
+└── README.md
+```
+
+The tree above highlights the files most relevant to understanding the architecture; it is not an exhaustive file listing.
 
 ## Known limitations
 
 - **Research POC:** the application has not been clinically validated and is not intended for diagnosis, treatment selection, patient triage, or trial matching.
-- **Not a systematic review:** search results depend on provider coverage, query construction, indexing, availability, rate limits, and retrieval time.
-- **Registry limitations:** registered study data may be incomplete, outdated, or missing fields, and registration does not establish study quality or treatment efficacy.
-- **Geographic interpretation:** a listed site may not be open, accessible, or suitable for a user. A broader geographic fallback does not imply local access or eligibility.
+- **Not a systematic review:** results depend on provider coverage, query construction, indexing, availability, rate limits, and retrieval time.
+- **Registry limitations:** registered study data may be incomplete, outdated, or missing fields. Registration does not establish study quality or treatment efficacy.
+- **Geographic fallback:** when a rare biomarker and location return no locally registered study sites, the application can report the local zero count and surface broader international studies. This does not imply local access or eligibility.
 - **Generated research directions:** clusters and summaries are an organizational layer produced by the system, not expert consensus or clinical guidance.
-- **Descriptive scoring:** maturity, activity, volume, and momentum metrics are not probabilities of success and are not comparative treatment scores.
-- **Regulatory context:** an approval must be verified for its precise indication, population, biomarker, regimen, jurisdiction, and date. Regulatory approval is not automatically equivalent to a standard of care.
-- **Provider dependency:** live results can be affected by upstream outages, schema changes, timeouts, quotas, or rate limits.
-- **Cache freshness:** in-memory caching can make a response differ temporarily from the latest upstream record.
-- **AI variability:** optional model-assisted harmonization may be imperfect; users should inspect the underlying source records.
+- **Heuristic scoring:** maturity, activity, volume, and momentum are descriptive software metrics—not validated endpoints or probabilities of success.
+- **Regulatory interpretation:** an approval must be verified for its precise indication, population, biomarker, regimen, jurisdiction, and date. Regulatory approval is not automatically equivalent to a standard of care.
+- **Provider dependency:** upstream outages, timeouts, rate limits, quotas, and schema changes can affect live results.
+- **Cache freshness:** in-memory caching can make a response temporarily differ from the latest upstream record.
+- **Native provider gaps:** direct PubMed and openFDA adapters are not yet implemented.
+- **No public demo link yet:** the repository currently documents local execution; no hosted one-click preview is claimed here.
+- **Limited automated verification:** broader tests, continuous integration, reproducible benchmarks, and independent scientific review remain roadmap work.
 
 ## Project status
 
-Cancer Research Radar is an open-source research POC. The current implementation demonstrates an end-to-end provider architecture and interactive evidence-exploration workflow; it should not be described as production-ready clinical software.
+Cancer Research Radar is an open-source research POC. It demonstrates an end-to-end provider architecture and an interactive oncology evidence-exploration workflow, but it should not be described as production-ready clinical software.
 
 ### Completed
 
 - [x] Provider abstraction and normalized evidence models
 - [x] Live ClinicalTrials.gov v2 integration
-- [x] Live Cure Cancer With AI literature and regulatory integration
-- [x] Server-side credential isolation
+- [x] Server-side Cure Cancer With AI integration paths
+- [x] Gemini synthesis endpoint
 - [x] Explicit live, partial, demo, and fallback modes
-- [x] Research-direction mapping and deterministic activity metrics
+- [x] Deterministic radar and momentum heuristics
 - [x] Dashboard, Radar, Evidence Explorer, Trials, Research, and Regulatory views
-- [x] Source identifiers and evidence links carried into the interface
+- [x] Source identifiers and evidence links carried into normalized records when supplied
+- [x] Server-side credential boundary
 
 ### Roadmap
 
-- [ ] Direct PubMed provider
-- [ ] Direct openFDA provider
+- [ ] Native PubMed ingestion through NCBI E-utilities
+- [ ] Native openFDA provider
 - [ ] Europe PMC provider
 - [ ] Cross-provider deduplication and record reconciliation
-- [ ] Longitudinal research-activity analysis with documented methodology
-- [ ] Stronger indication-, biomarker-, and population-aware regulatory matching
-- [ ] Geographic radius and travel-time estimation for registered trial sites
+- [ ] Stronger indication-, biomarker-, population-, and jurisdiction-aware regulatory matching
+- [ ] Geographic radius and travel-time estimation for registered sites
+- [ ] Automated provider, normalization, provenance, and data-mode tests
+- [ ] Continuous integration with an evidence-backed build badge
+- [ ] Reproducible latency and cache benchmarks
+- [ ] Public hosted demo
 - [ ] Exportable, source-linked evidence reports
-- [ ] Automated tests for provider failures, provenance, normalization, and data-mode transitions
 - [ ] Independent scientific and usability review
 
 ## Documentation
@@ -224,11 +322,11 @@ Contributions, bug reports, documentation improvements, and scientific feedback 
 1. Open an issue describing the problem or proposed change.
 2. Fork the repository and create a focused branch.
 3. Keep provider logic separate from presentation components.
-4. Preserve source identifiers, source URLs, retrieval state, and data-mode labels.
-5. Add or update tests for behavior that affects normalization, provenance, or safety messaging.
-6. Submit a pull request explaining the change, its evidence basis, and any remaining limitations.
+4. Preserve source identifiers, evidence URLs, retrieval state, and data-mode labels.
+5. Add or update tests for changes affecting normalization, provenance, or safety messaging.
+6. Submit a pull request describing the change, its evidence basis, and any remaining limitations.
 
-Please do not commit API keys, patient data, protected health information, or copyrighted source content that the project is not permitted to redistribute.
+Do not commit API keys, patient data, protected health information, or copyrighted source material that the project is not permitted to redistribute.
 
 ## Citation
 
@@ -239,6 +337,7 @@ If you use Cancer Research Radar in research, teaching, a presentation, or a sof
   author  = {Chaker, Riadh},
   title   = {Cancer Research Radar: A Source-Grounded Oncology Evidence Exploration Platform},
   year    = {2026},
+  url     = {https://github.com/Docriadhchaker/Cancer-Research-Radar},
   license = {MIT},
   note    = {Open-source research proof of concept}
 }
